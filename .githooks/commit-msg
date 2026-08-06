@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+# commit-msg — valide que le sujet du commit respecte Conventional Commits.
+#
+# Activé via core.hooksPath=.githooks (posé par le script npm "prepare").
+# Contourner ponctuellement : git commit --no-verify
+#
+# Format attendu : <type>[(scope)][!]: <description>
+#   ex. feat(ui): ajoute le bouton de copie
+#       fix!: corrige une régression cassant l'API
+
+msg_file="$1"
+
+# Sujet = première ligne non vide et non commentée (on retire un éventuel CR Windows).
+subject="$(grep -v '^#' "$msg_file" | tr -d '\r' | sed '/^[[:space:]]*$/d' | head -n1)"
+
+# Laisser passer les messages générés par git (merge, revert, autosquash).
+case "$subject" in
+  "Merge "* | "Revert "* | "fixup! "* | "squash! "* | "amend! "*) exit 0 ;;
+esac
+
+# type(scope facultatif)(! facultatif): description non vide
+pattern='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9._/-]+\))?!?: .+'
+
+if printf '%s' "$subject" | grep -Eq "$pattern"; then
+  exit 0
+fi
+
+echo "✖ commit-msg : message non conforme à Conventional Commits." >&2
+echo >&2
+echo "  Reçu   : ${subject:-<vide>}" >&2
+echo "  Format : <type>[(scope)][!]: <description>" >&2
+echo "  Types  : feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert" >&2
+echo "  Ex.    : feat(ui): ajoute le bouton de copie" >&2
+echo >&2
+echo "  (Contourner : git commit --no-verify)" >&2
+exit 1

@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+# pre-push — parité CI avant publication : tests e2e + build Storybook.
+#
+# Le pre-commit couvre déjà format/lint/typecheck/test ; on ajoute ici les vérifs
+# lourdes de la CI. Playwright construit l'app lui-même via son webServer
+# (npm run build && npm run preview), donc test:e2e couvre aussi le build.
+#
+# Activé via core.hooksPath=.githooks (posé par le script npm "prepare").
+# Contourner ponctuellement : git push --no-verify
+
+echo "▶ pre-push : tests e2e (Playwright) + build Storybook…"
+
+if ! npm run test:e2e; then
+  echo >&2
+  echo "✖ pre-push : 'npm run test:e2e' a échoué — push annulé." >&2
+  echo "  (Contourner : git push --no-verify)" >&2
+  exit 1
+fi
+
+if ! npm run build-storybook; then
+  echo >&2
+  echo "✖ pre-push : 'npm run build-storybook' a échoué — push annulé." >&2
+  echo "  (Contourner : git push --no-verify)" >&2
+  exit 1
+fi

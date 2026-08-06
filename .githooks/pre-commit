@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+# pre-commit — garde-fou rapide : rejoue les checks qualité de la CI.
+#
+# = npm run check (format:check + lint + typecheck + test). Volontairement léger
+# pour ne pas ralentir chaque commit ; les vérifs lourdes (e2e, Storybook) sont
+# dans le hook pre-push.
+#
+# Activé via core.hooksPath=.githooks (posé par le script npm "prepare").
+# Contourner ponctuellement : git commit --no-verify
+
+echo "▶ pre-commit : npm run check (format + lint + typecheck + test)…"
+
+if ! npm run check; then
+  echo >&2
+  echo "✖ pre-commit : 'npm run check' a échoué — commit annulé." >&2
+  echo "  (Contourner : git commit --no-verify)" >&2
+  exit 1
+fi
