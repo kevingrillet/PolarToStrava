@@ -1,3 +1,10 @@
+storybook-static/
+test-results/
+
+# Données locales de l'outil : jeton OAuth Strava, journal de reprise des envois,
+# cache de scan de l'export. Strictement personnel — ne doit jamais être versionné.
+.data/
+
 # Logs
 logs
 *.log
@@ -47,6 +54,9 @@ web_modules/
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Claude Code — index codegraph (généré par `codegraph serve --mcp`, machine-locale)
+.codegraph/
 
 # Optional npm cache directory
 .npm

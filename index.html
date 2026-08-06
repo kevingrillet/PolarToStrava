@@ -1,0 +1,52 @@
+<!doctype html>
+<!-- data-theme par défaut ; l'identité réelle + le mode clair/sombre sont
+     appliqués par le script anti-flash ci-dessous, puis gérés par useTheme. -->
+<html lang="fr" data-theme="default">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polar → Strava</title>
+    <meta
+      name="description"
+      content="Importer son historique Polar Flow dans Strava : lecture de l'export, conversion en TCX, envoi avec gestion des quotas."
+    />
+    <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#030712" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+
+    <!-- Ni manifeste ni service worker : outil lancé en local, un cache hors-ligne
+         n'apporterait rien et resservirait une interface périmée. -->
+
+    <script>
+      // Applique le thème AVANT le rendu pour éviter le « flash » (FOUC).
+      // Doit rester cohérent avec src/theme.ts + src/hooks/useTheme.ts
+      // (clés localStorage "theme-name" pour l'identité, "theme" pour le mode).
+      (function () {
+        try {
+          var root = document.documentElement;
+          var name = localStorage.getItem('theme-name');
+          if (
+            name === 'default' ||
+            name === 'atelier' ||
+            name === 'blueprint' ||
+            name === 'aurora'
+          ) {
+            root.dataset.theme = name;
+          }
+          var mode = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (mode === 'dark' || (mode === null && prefersDark)) {
+            root.classList.add('dark');
+          }
+        } catch (e) {
+          /* localStorage indisponible : on ignore. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

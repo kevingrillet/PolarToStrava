@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.server.tsbuildinfo",
+
+    "types": ["node"]
+  },
+  /* `core/` est volontairement inclus ici ET dans tsconfig.app.json : c'est du
+     TypeScript sans dépendance à la plateforme, partagé entre le backend (qui
+     lit le ZIP et génère les TCX) et le front (qui en réutilise les types).
+     Deux projets indépendants le vérifient donc chacun de leur côté — un peu de
+     travail en double au typecheck, mais aucune référence de projet à gérer. */
+  "include": ["server", "core", "scripts"]
+}

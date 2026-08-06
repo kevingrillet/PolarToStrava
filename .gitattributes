@@ -1,2 +1,2 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Auto detect text files, normaliser en LF (stockage ET checkout) — cross-plateforme
+* text=auto eol=lf
