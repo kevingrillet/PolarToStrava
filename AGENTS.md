@@ -121,8 +121,9 @@ avant de se caler. Ne pas modifier `core/polar/` sans avoir lu ce fichier.
 
 200 requêtes / 15 min et 2 000 / jour. Une séance coûte 2 à 3 requêtes (1 envoi,
 1 à 2 sondages d'état ; la correction de sport n'est plus nécessaire depuis le
-passage au FIT). Un historique de 700 séances dépasse donc le quota journalier :
-**l'import s'étale sur plusieurs jours**, et c'est normal.
+passage au FIT). Un historique de 700 séances frôle donc le quota journalier, et
+le dépasse dès qu'une séance demande un sondage de plus : **l'import s'étale sur
+un à deux jours**, et c'est normal.
 
 D'où : lecture des en-têtes `X-RateLimit-*` à chaque réponse, attente calée sur
 les bornes réelles (tranches de 15 min alignées sur l'horloge, minuit UTC pour le

@@ -108,7 +108,7 @@ Strava : la valeur vient d'une mesure.
 
 **Voie API** — Strava limite à 200 requêtes par 15 minutes et 2 000 par jour, et
 une séance consomme 2 à 3 requêtes. Un historique de 700 séances demande donc
-plusieurs jours. C'est prévu : la progression est écrite sur disque au fil de
+**un à deux jours**. C'est prévu : la progression est écrite sur disque au fil de
 l'eau, l'outil attend de lui-même que le quota se libère (avec compte à rebours à
 l'écran), et relancer l'envoi reprend là où il s'était arrêté.
 
