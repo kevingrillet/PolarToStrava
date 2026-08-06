@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Dépendances npm (React, Vite, outillage…)
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+  # Actions GitHub utilisées par les workflows
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
