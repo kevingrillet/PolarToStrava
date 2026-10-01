@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@garmin/fitsdk": "^21.214.0",
-    "fastify": "^5.12.3",
+    "fastify": "^5.12.5",
     "fflate": "^0.8.2",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
