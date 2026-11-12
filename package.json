@@ -67,7 +67,7 @@
     "prettier": "^3.9.10",
     "rimraf": "^6.0.1",
     "storybook": "^10.6.5",
-    "tailwindcss": "^4.3.2",
+    "tailwindcss": "^4.3.5",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "typescript-eslint": "^8.72.1",
